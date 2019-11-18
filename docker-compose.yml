@@ -1,0 +1,25 @@
+version: "2.4"
+
+x-base: &base
+  build: .
+  privileged: true
+  volumes: 
+    - ./test/files/docker/entrypoint.d/555-test.sh:/docker/entrypoint.d/555-test.sh
+    - ./test/files/docker/entrypoint.d/111-earlier-once.sh:/docker/entrypoint.d/111-earlier-once.sh
+    - ./test/files/docker/entrypoint.d/777-later-once.sh:/docker/entrypoint.d/777-later-once.sh
+    - ./test/files/docker/run-cmd.sh:/docker/run-cmd.sh
+
+
+services:
+  simple:
+    <<: *base
+    # command:
+    #   - tree /docker 
+    #   - /var/log
+
+  # test:
+  #   <<: *base
+  #   command:
+  #     - echo me
+  #   environment:
+  #     - KEEP_RUNNING=1
