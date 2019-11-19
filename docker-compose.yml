@@ -13,6 +13,8 @@ x-base: &base
 services:
   simple:
     <<: *base
+    environment:
+      - LOGO_FILE=""
     # command:
     #   - tree /docker 
     #   - /var/log

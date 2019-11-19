@@ -11,5 +11,6 @@ COPY files/docker /docker
 
 ENV KEEP_RUNNING=0
 ENV LOG_STDOUT=1
+ENV LOGO_FILE=/docker/logo.txt
 
 ENTRYPOINT [ "/docker/entrypoint.sh" ]

@@ -57,7 +57,7 @@ function main() {
 }
 
 
-[[ -e /docker/logo.txt ]] && cat /docker/logo.txt 
+[[ ! -z $LOGO_FILE ]] && [[ -e $LOGO_FILE ]] && cat $LOGO_FILE 
 
 setup_logs
 
