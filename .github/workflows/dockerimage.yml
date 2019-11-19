@@ -14,6 +14,6 @@ jobs:
       run: |
         V=$(cat versions.md | grep "## " | head -n 1 | awk '{print $2}')
         git remote -v
-        T=$(git remote -v | grep 'origin' | grep '(push)' | grep 'git@github.com' | awk -v V="$V" -F '[@ :\t/\.]' '{print "docker.pkg.github.com/" $5 "/" $6 "/" $6 ":" V }')
+        T=$(git remote -v | head -n1 | awk -v V="$V" -F '[@ :\t/\.]' '{split($5, arr, " "); print "docker.pkg.github.com/" $4 "/" arr[1] "/" arr[1] ":" V }')
         docker build . -t my-centos7:$T
         docker push my-centos7:$T
