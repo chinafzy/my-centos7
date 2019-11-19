@@ -12,4 +12,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: |
-        docker build . --tag my-centos7:$(date +%s)
+        V=$(cat $(dirname $0)/versions.md | grep "## " | head -n 1 | awk '{print $2}')
+        T=$(git remote -v | grep 'origin' | grep '(push)' | grep 'git@github.com' | awk -v V="$V" -F '[@ :\t/\.]' '{print "docker.pkg.github.com/" $5 "/" $6 "/" $6 ":" V }')
+        docker build . -t my-centos7:$T
+        docker push my-centos7:$T
